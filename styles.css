@@ -63,3 +63,15 @@ form {
     font-size: 12px;
 
 }
+
+.delete-section {
+    margin-top: 20px;
+    display: flex;
+    gap: 8px;
+}
+.delete-section input {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
