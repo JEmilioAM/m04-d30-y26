@@ -1,4 +1,3 @@
-/*No actualizar*/
 function handleFormSubmit(event){
     event.preventDefault();
 
