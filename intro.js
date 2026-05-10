@@ -1,34 +1,54 @@
-//Crea las casillas, pero sin un label, todo es sin salto de linea,
-//por ende no hay texto tachado con las tareas completadas 
-//y, a£n no pueden crearse con tareas con texto y borrarse tareas
+function handleFormSubmit(event){
+    event.preventDefault();
 
-const input = document.getElementById("txt-title-task");
-let i = 1;
+    const formData = new FormData(event.target);
+    const task = Object.fromEntries(formData);
+    task.id = Date.now();
 
-function handleClick(event){
-    let box = document.getElementById("btn-add-task");
+    const taskElement = createTaskElement(task);
+    const ulContainer = document.getElementById("task-list-container");
+
+    if(!ulContainer) return;
+
+    ulContainer.appendChild(taskElement);
+
+}
+
+function createTaskElement (task){    
+    const divTaskContent = document.createElement("div");
+    divTaskContent.classList.add("task-content");
+
+    const h3Title = document.createElement("h3");
+    h3Title.textContent = task.title;
     
-    if (box === null) return;
-        
-    box = document.createElement("input");
-    box.id = "box" + i;
-    box.type = "checkbox";
-    //box.onclick = "handleClick_Double(event)";
-    const lbl = document.createElement("label");
-    lbl.id = "label" + i;
-    lbl.textContent = input.value + "   ";
+    const pDescription = document.createElement("p");
+    pDescription.textContent = task.description;
 
-    const btn_nuevo = document.createElement("button");
-    btn_nuevo.id = "btn_nuevo" + i;
-    btn_nuevo.textContent = "Remove";
+    divTaskContent.appendChild(h3Title);
+    divTaskContent.appendChild(pDescription);
 
-    const salto = document.createElement("br");
+    const divTaskAction = document.createElement("div");
+    divTaskAction.classList.add("task-actions");
 
-    document.body.appendChild(box);
-    document.body.appendChild(lbl);
-    document.body.appendChild(btn_nuevo);
-    document.body.appendChild(salto);
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar";
+    deleteButton.addEventListener("click", () => deleteTaskElement(task));
 
-    i++;
+    divTaskAction.appendChild(deleteButton);
+
+    const li = document.createElement("li");
+    li.classList.add("task-item");
+    li.id = task.id;
+
+    li.appendChild(divTaskContent);
+    li.appendChild(divTaskAction);
+
+    return li;
+
+}
+
+function deleteTaskElement(task){
+    const li = document.getElementById(task.id);
+    li.remove();
 
 }
