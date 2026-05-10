@@ -1,0 +1,11 @@
+.btn-setup-one{
+    background-color: dodgerblue;
+    border-style: none;
+    border-radius: 3px;
+
+}
+
+.btn-setup-two:active{
+    color: white;
+
+}
