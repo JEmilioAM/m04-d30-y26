@@ -3,33 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Administrador de Tareas</title>
 
     <link rel="stylesheet" href="./styles.css">
-
 </head>
 <body>
-    <div>
-        <h1 id="title">Task Manager</h1>
-        <p>Track your to-do with a simple JavaScript task manager.</p>
+    <div class="main-container">
+        <h2>Administrar Tareas.</h2>
         
-        <input id="txt-title-task" placeholder="Add a new task">
-        <button id="btn-add-task" class="btn-setup-one btn-setup-two"
-        onclick="handleClick(event)">Add Task</button>
+    <form onsubmit="handleFormSubmit(event)">
+        <input required type="text" placeholder="Titulo" name="title">
+        <textarea placeholder="Agrega la descripcion de la tarea" name="description" rows="5"></textarea>
+        <button type="Agregar">Agregar</button>
 
-    </div>
+    </form>
 
-    <div>
-        <!--
-        <label>
-            <input type="checkbox" name="opcion" value="1">
-            Etiqueta de la casilla
-        </label>
-        -->
+    <ul id="task-list-container" class="task-list"></ul>
 
-    </div>
+    </div>    
 
     <script src="./intro.js"></script>
-
 </body>
 </html>
