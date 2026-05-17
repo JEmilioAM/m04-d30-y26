@@ -118,7 +118,7 @@ function createTaskElement(task) {
   cancelBtn.style.display = 'none';
   cancelBtn.classList.add('cancel-btn');
 
-  // BOTÓN ELIMINAR ORIGINAL (SÍ FUNCIONA)
+  // BOTÓN ELIMINAR PROPIO DE CADA TAREA
   const deleteButton = document.createElement('button');
   deleteButton.textContent = 'Eliminar';
   deleteButton.addEventListener('click', () => deleteTaskElement(task));
