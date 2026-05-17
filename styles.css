@@ -1,55 +1,62 @@
-/* ====== ESTILO CAMPESTRE PARA ADMINISTRADOR DE TAREAS ====== */
+/* ====== ESTILO CAMPESTRE RESPONSIVE ====== */
 :root {
   /* Paleta de colores tierra */
-  --color-fondo: #fdf5e6;        /* Old lace, fondo general cálido */
-  --color-contenedor: #fffaf0;   /* Floral white */
-  --color-borde: #8b5a2b;        /* Marrón madera */
-  --color-texto: #4a3728;        /* Marrón oscuro */
+  --color-fondo: #fdf5e6;
+  --color-contenedor: #fffaf0;
+  --color-borde: #8b5a2b;
+  --color-texto: #4a3728;
   --color-texto-claro: #6b5a4e;
-  --color-naranja: #d2691e;      /* Chocolate (naranja terroso) */
+  --color-naranja: #d2691e;
   --color-naranja-hover: #b85c1a;
-  --color-marron: #8b4513;       /* Saddle brown */
+  --color-marron: #8b4513;
   --color-marron-hover: #6b3410;
-  --color-fondo-tarea: #f5e6d3;  /* Beige arena */
+  --color-fondo-tarea: #f5e6d3;
   --color-sombra: rgba(139, 90, 43, 0.15);
 
   /* Fuentes offline */
   --fuente-titulos: Georgia, 'Times New Roman', serif;
   --fuente-cuerpo: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Espaciados base */
+  --padding-container: 24px 20px;
+  --border-radius: 12px;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Fondo campestre con degradado tierra y naranja */
   background: radial-gradient(circle at top, #fff3e0 0%, #fdf5e6 40%, #f9f3e3 100%);
   font-family: var(--fuente-cuerpo);
   color: var(--color-texto);
+  padding: 16px;                 /* Espacio para pantallas pequeñas */
 }
 
+/* Contenedor principal: ahora fluido */
 .main-container {
-  width: 420px;
+  width: 100%;
+  max-width: 480px;             /* Máximo para pantallas grandes */
   background: var(--color-contenedor);
-  padding: 24px 20px;
-  border-radius: 12px;
-  border: 1px solid #d2b48c;       /* Tan */
+  padding: var(--padding-container);
+  border-radius: var(--border-radius);
+  border: 1px solid #d2b48c;
   box-shadow: 0 6px 16px var(--color-sombra), 0 2px 4px rgba(0,0,0,0.05);
   background-image: linear-gradient(to bottom, #fffaf0, #fef5e7);
+  margin: 0 auto;
 }
 
 h2 {
   font-family: var(--fuente-titulos);
-  font-size: 24px;
+  font-size: clamp(20px, 5vw, 24px);   /* Se adapta entre 20px y 24px */
   color: var(--color-marron);
   text-align: center;
-  margin-top: 0;
   margin-bottom: 20px;
   border-bottom: 2px dashed #c4a47c;
   padding-bottom: 10px;
@@ -59,7 +66,7 @@ h2 {
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 input[type="text"],
@@ -72,6 +79,7 @@ textarea {
   background-color: #fffef9;
   color: var(--color-texto);
   transition: border-color 0.2s;
+  width: 100%;
 }
 
 input[type="text"]:focus,
@@ -91,9 +99,9 @@ button {
   font-size: 13px;
   font-weight: 600;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
-/* Botón principal Agregar */
 button[type="submit"] {
   background-color: var(--color-naranja);
   color: white;
@@ -112,10 +120,13 @@ button[type="submit"]:hover {
   margin-top: 20px;
 }
 
+/* Tarjeta de tarea */
 .task-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;                /* Permite que los botones bajen en pantallas pequeñas */
+  gap: 10px;
   background-color: var(--color-fondo-tarea);
   padding: 12px;
   border-radius: 10px;
@@ -129,31 +140,39 @@ button[type="submit"]:hover {
   transform: translateY(-1px);
 }
 
-/* Contenido de la tarea */
+/* Contenido de la tarea (título y descripción) */
+.task-item .task-content {
+  flex: 1 1 180px;               /* Crece/decrece, base 180px */
+  min-width: 150px;
+}
+
 .task-item .task-content h3 {
   font-family: var(--fuente-titulos);
-  font-size: 17px;
+  font-size: clamp(15px, 3vw, 17px);
   margin: 0 0 4px;
   color: var(--color-marron);
+  word-break: break-word;
 }
 
 .task-item .task-content p {
   margin: 0;
   color: var(--color-texto-claro);
-  font-size: 13px;
+  font-size: clamp(12px, 2.5vw, 13px);
   font-style: italic;
+  word-break: break-word;
 }
 
 /* Inputs de edición (cuando se activan) */
 .edit-title-input,
 .edit-desc-textarea {
   width: 100%;
-  padding: 4px 8px;
+  padding: 6px 8px;
   margin-bottom: 4px;
   border: 1px solid #c4a47c;
   border-radius: 6px;
   font-family: var(--fuente-cuerpo);
   background: #fffef9;
+  font-size: 14px;
 }
 
 .edit-desc-textarea {
@@ -164,8 +183,9 @@ button[type="submit"]:hover {
 .task-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-left: 10px;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 /* Todos los botones dentro de task-actions */
@@ -173,18 +193,19 @@ button[type="submit"]:hover {
   margin: 0;
   border-radius: 6px;
   font-size: 12px;
-  padding: 4px 8px;
+  padding: 5px 8px;
   font-weight: 500;
   background-color: #f0e6d3;
   border: 1px solid #c9af8b;
   color: var(--color-texto);
+  flex-shrink: 0;
 }
 
 .task-actions button:hover {
   background-color: #e4d0b5;
 }
 
-/* Botón Eliminar (rojo terroso para destacar) */
+/* Botón Eliminar (rojo terroso) */
 .task-actions button:last-child {
   background-color: #b94a3a;
   border-color: #8b3a2e;
@@ -195,14 +216,14 @@ button[type="submit"]:hover {
   background-color: #a13d2f;
 }
 
-/* Botones Guardar y Cancelar (cuando están visibles) */
+/* Botones Guardar y Cancelar */
 .save-btn,
 .cancel-btn {
   font-weight: bold;
 }
 
 .save-btn {
-  background-color: #7a9f6e;  /* Verde oliva suave */
+  background-color: #7a9f6e;
   border-color: #5c7a4f;
   color: white;
 }
@@ -224,9 +245,10 @@ button[type="submit"]:hover {
 /* Mensaje de error dentro de la tarea */
 .task-error {
   display: block;
+  width: 100%;
   color: #b94a3a;
   font-size: 11px;
-  margin-top: 3px;
+  margin-top: 4px;
   font-style: italic;
 }
 
@@ -235,10 +257,12 @@ button[type="submit"]:hover {
   margin-top: 20px;
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .delete-section input {
-  flex: 1;
+  flex: 1 1 150px;
+  min-width: 120px;
   padding: 8px 10px;
   border: 1px solid #c4a47c;
   border-radius: 6px;
@@ -250,17 +274,104 @@ button[type="submit"]:hover {
   background-color: var(--color-marron);
   color: white;
   border-color: #6b3410;
+  flex-shrink: 0;
 }
 
 .delete-section button:hover {
   background-color: var(--color-marron-hover);
 }
 
-/* Errores generales (formulario y delete) */
+/* Errores generales */
 #form-error,
 #delete-error {
   font-size: 13px;
   color: #b94a3a;
   margin-top: 8px;
   font-style: italic;
+}
+
+/* ==============================
+   MEDIA QUERIES RESPONSIVE
+   ============================== */
+
+/* Tablets y móviles grandes (hasta 600px) */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+    align-items: flex-start;     /* Evita que el formulario quede muy arriba */
+    padding-top: 20px;
+  }
+
+  .main-container {
+    padding: 16px 12px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  form {
+    gap: 10px;
+  }
+
+  input[type="text"],
+  textarea {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  button[type="submit"],
+  button {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+
+  .task-item {
+    flex-direction: column;      /* Título arriba, botones abajo */
+    align-items: stretch;
+  }
+
+  .task-actions {
+    justify-content: flex-start;
+  }
+
+  .task-actions button {
+    font-size: 11px;
+    padding: 4px 7px;
+  }
+
+  .delete-section {
+    flex-direction: column;
+  }
+
+  .delete-section button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Móviles pequeños (hasta 400px) */
+@media (max-width: 400px) {
+  .main-container {
+    border-radius: 8px;
+    box-shadow: 0 3px 8px var(--color-sombra);
+  }
+
+  .task-item .task-content {
+    min-width: 100%;
+  }
+
+  .task-actions {
+    gap: 4px;
+  }
+
+  .task-actions button {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+
+  .delete-section input {
+    font-size: 13px;
+  }
 }
