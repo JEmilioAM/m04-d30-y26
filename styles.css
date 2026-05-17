@@ -75,3 +75,40 @@ form {
     border: 1px solid #ccc;
     border-radius: 6px;
 }
+
+/* Estilos para los nuevos botones e inputs en modo edición */
+.edit-title-input,
+.edit-desc-textarea {
+    width: 100%;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+.edit-desc-textarea {
+    resize: vertical;
+}
+
+.task-actions button {
+    margin-right: 4px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    padding: 3px 8px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-size: 13px;
+}
+
+.task-actions button:hover {
+    background-color: #e0e0e0;
+}
+
+.task-error {
+    display: block;
+    color: #cc0000;
+    font-size: 12px;
+    margin-top: 2px;
+}
