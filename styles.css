@@ -1,114 +1,266 @@
+/* ====== ESTILO CAMPESTRE PARA ADMINISTRADOR DE TAREAS ====== */
 :root {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f4f7fb;
-    color: #1d2636;
+  /* Paleta de colores tierra */
+  --color-fondo: #fdf5e6;        /* Old lace, fondo general cálido */
+  --color-contenedor: #fffaf0;   /* Floral white */
+  --color-borde: #8b5a2b;        /* Marrón madera */
+  --color-texto: #4a3728;        /* Marrón oscuro */
+  --color-texto-claro: #6b5a4e;
+  --color-naranja: #d2691e;      /* Chocolate (naranja terroso) */
+  --color-naranja-hover: #b85c1a;
+  --color-marron: #8b4513;       /* Saddle brown */
+  --color-marron-hover: #6b3410;
+  --color-fondo-tarea: #f5e6d3;  /* Beige arena */
+  --color-sombra: rgba(139, 90, 43, 0.15);
+
+  /* Fuentes offline */
+  --fuente-titulos: Georgia, 'Times New Roman', serif;
+  --fuente-cuerpo: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at top, #e8f2ff 0%, #f4f7fb 40%, #f9fbff 100%);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Fondo campestre con degradado tierra y naranja */
+  background: radial-gradient(circle at top, #fff3e0 0%, #fdf5e6 40%, #f9f3e3 100%);
+  font-family: var(--fuente-cuerpo);
+  color: var(--color-texto);
 }
 
 .main-container {
-    width: 400px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 420px;
+  background: var(--color-contenedor);
+  padding: 24px 20px;
+  border-radius: 12px;
+  border: 1px solid #d2b48c;       /* Tan */
+  box-shadow: 0 6px 16px var(--color-sombra), 0 2px 4px rgba(0,0,0,0.05);
+  background-image: linear-gradient(to bottom, #fffaf0, #fef5e7);
 }
 
+h2 {
+  font-family: var(--fuente-titulos);
+  font-size: 24px;
+  color: var(--color-marron);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px dashed #c4a47c;
+  padding-bottom: 10px;
+}
+
+/* Formulario */
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.task-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
+input[type="text"],
+textarea {
+  padding: 10px 12px;
+  border: 1px solid #c4a47c;
+  border-radius: 8px;
+  font-family: var(--fuente-cuerpo);
+  font-size: 14px;
+  background-color: #fffef9;
+  color: var(--color-texto);
+  transition: border-color 0.2s;
+}
 
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-naranja);
+  box-shadow: 0 0 0 2px rgba(210, 105, 30, 0.2);
+}
+
+button[type="submit"],
+button {
+  cursor: pointer;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-family: var(--fuente-cuerpo);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+/* Botón principal Agregar */
+button[type="submit"] {
+  background-color: var(--color-naranja);
+  color: white;
+  border-color: #a0522d;
+  letter-spacing: 0.3px;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--color-naranja-hover);
+}
+
+/* Lista de tareas */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
 }
 
 .task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    background-color: #c3c3c3;
-    padding: 8px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-fondo-tarea);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e4cba5;
+  box-shadow: 0 2px 4px rgba(139, 90, 43, 0.08);
+  transition: transform 0.1s ease;
 }
 
-.task-item .task-content h3 {
-    font-size: 16px;
-    margin: 0 0 5px;
+.task-item:hover {
+  transform: translateY(-1px);
+}
 
+/* Contenido de la tarea */
+.task-item .task-content h3 {
+  font-family: var(--fuente-titulos);
+  font-size: 17px;
+  margin: 0 0 4px;
+  color: var(--color-marron);
 }
 
 .task-item .task-content p {
-    margin: 0;
-    color: #555;
-    font-size: 12px;
-
+  margin: 0;
+  color: var(--color-texto-claro);
+  font-size: 13px;
+  font-style: italic;
 }
 
-.delete-section {
-    margin-top: 20px;
-    display: flex;
-    gap: 8px;
-}
-.delete-section input {
-    flex: 1;
-    padding: 6px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-/* Estilos para los nuevos botones e inputs en modo edición */
+/* Inputs de edición (cuando se activan) */
 .edit-title-input,
 .edit-desc-textarea {
-    width: 100%;
-    padding: 4px 8px;
-    margin-bottom: 4px;
-    border: 1px solid #aaa;
-    border-radius: 6px;
-    font-family: inherit;
+  width: 100%;
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  border: 1px solid #c4a47c;
+  border-radius: 6px;
+  font-family: var(--fuente-cuerpo);
+  background: #fffef9;
 }
 
 .edit-desc-textarea {
-    resize: vertical;
+  resize: vertical;
 }
 
+/* Contenedor de botones de acción */
+.task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+/* Todos los botones dentro de task-actions */
 .task-actions button {
-    margin-right: 4px;
-    margin-bottom: 4px;
-    cursor: pointer;
-    padding: 3px 8px;
-    border: 1px solid #888;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    font-size: 13px;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 8px;
+  font-weight: 500;
+  background-color: #f0e6d3;
+  border: 1px solid #c9af8b;
+  color: var(--color-texto);
 }
 
 .task-actions button:hover {
-    background-color: #e0e0e0;
+  background-color: #e4d0b5;
 }
 
+/* Botón Eliminar (rojo terroso para destacar) */
+.task-actions button:last-child {
+  background-color: #b94a3a;
+  border-color: #8b3a2e;
+  color: white;
+}
+
+.task-actions button:last-child:hover {
+  background-color: #a13d2f;
+}
+
+/* Botones Guardar y Cancelar (cuando están visibles) */
+.save-btn,
+.cancel-btn {
+  font-weight: bold;
+}
+
+.save-btn {
+  background-color: #7a9f6e;  /* Verde oliva suave */
+  border-color: #5c7a4f;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #688b5c;
+}
+
+.cancel-btn {
+  background-color: #bc8f6f;
+  border-color: #9b7653;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #a67c5b;
+}
+
+/* Mensaje de error dentro de la tarea */
 .task-error {
-    display: block;
-    color: #cc0000;
-    font-size: 12px;
-    margin-top: 2px;
+  display: block;
+  color: #b94a3a;
+  font-size: 11px;
+  margin-top: 3px;
+  font-style: italic;
+}
+
+/* Sección de eliminar por título */
+.delete-section {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.delete-section input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #c4a47c;
+  border-radius: 6px;
+  font-family: var(--fuente-cuerpo);
+  background-color: #fffef9;
+}
+
+.delete-section button {
+  background-color: var(--color-marron);
+  color: white;
+  border-color: #6b3410;
+}
+
+.delete-section button:hover {
+  background-color: var(--color-marron-hover);
+}
+
+/* Errores generales (formulario y delete) */
+#form-error,
+#delete-error {
+  font-size: 13px;
+  color: #b94a3a;
+  margin-top: 8px;
+  font-style: italic;
 }
